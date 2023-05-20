@@ -1,0 +1,22 @@
+#disable mysql latest version
+
+dnf module disable mysql -y
+
+#create Repo - /etc/yum.repos.d/mysql.repo
+
+[mysql]
+name=MySQL 5.7 Community Server
+baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
+enabled=1
+gpgcheck=0
+
+yum install mysql-community-server -y
+
+systemctl enable mysqld
+systemctl start mysqld
+
+#update password for accessing mysql server
+mysql_secure_installation --set-root-pass RoboShop@1
+
+mysql -uroot -pRoboShop@1   - optional command
+
